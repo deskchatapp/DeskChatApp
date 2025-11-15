@@ -4,135 +4,522 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DeskChat App - Privacy-First Local Communities</title>
-    <meta name="description" content="Connect locally with complete privacy. DeskChat App enables genuine community building without surveillance.">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Coffee Brown Brand Colors */
+        :root {
+            --coffee-dark: #6F4E37;
+            --coffee-medium: #8B6B4D;
+            --coffee-light: #A68A6D;
+            --coffee-cream: #D2B48C;
+            --coffee-milk: #F5F1E8;
+            --text-dark: #2D2D2D;
+            --text-light: #5A5A5A;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--white);
+        }
+
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 20px rgba(111, 78, 55, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--coffee-dark);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--coffee-medium);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--coffee-dark);
+        }
+
+        .cta-button {
+            background: var(--coffee-dark);
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: var(--coffee-medium);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--coffee-milk) 0%, var(--white) 100%);
+            padding: 12rem 2rem 6rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--coffee-dark);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .secondary-button {
+            background: transparent;
+            color: var(--coffee-dark);
+            border: 2px solid var(--coffee-dark);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .secondary-button:hover {
+            background: var(--coffee-dark);
+            color: var(--white);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 2rem;
+            background: var(--white);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--coffee-dark);
+            margin-bottom: 3rem;
+        }
+
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--coffee-milk);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: var(--coffee-dark);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Privacy Section */
+        .privacy {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, var(--coffee-dark) 0%, var(--coffee-medium) 100%);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .privacy h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .privacy p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        .privacy-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 3rem auto 0;
+        }
+
+        .privacy-feature {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .privacy-feature h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 2rem;
+            background: var(--coffee-milk);
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            color: var(--coffee-dark);
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .email-form {
+            max-width: 400px;
+            margin: 0 auto;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .email-input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--coffee-light);
+            border-radius: 50px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .email-input:focus {
+            border-color: var(--coffee-dark);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-column h4 {
+            color: var(--coffee-cream);
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .email-form {
+                flex-direction: column;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Header -->
     <header>
-        <nav>
-            <div class="logo">
-                <h1>DeskChat App</h1>
-            </div>
+        <nav class="nav-container">
+            <a href="#" class="logo">Desk<span>Chat</span></a>
             <ul class="nav-links">
                 <li><a href="#features">Features</a></li>
                 <li><a href="#privacy">Privacy</a></li>
-                <li><a href="#waitlist">Join Waitlist</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
+            <a href="#waitlist" class="cta-button">Join Waitlist</a>
         </nav>
     </header>
 
+    <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-content">
-            <h1>Your Neighborhood,<br>Connected Privately</h1>
-            <p>DeskChat App brings people together in physical spaces with end-to-end encryption and zero data harvesting.</p>
-            <div class="cta-buttons">
-                <button class="btn-primary" onclick="joinWaitlist()">Join Waitlist</button>
-                <button class="btn-secondary" onclick="scrollToFeatures()">Learn More</button>
-            </div>
-        </div>
-        <div class="hero-image">
-            <!-- Placeholder for app screenshot -->
-            <div class="phone-mockup">
-                <div class="screen">
-                    <div class="app-content">
-                        <div class="chat-bubble left">Hey neighbors!</div>
-                        <div class="chat-bubble right">Coffee at the park?</div>
-                    </div>
-                </div>
-            </div>
+        <h1>Connect Locally,<br>Protect Your Privacy</h1>
+        <p>DeskChat brings people together in physical spaces with complete privacy protection. No tracking, no surveillance, just genuine connections.</p>
+        <div class="hero-buttons">
+            <a href="#waitlist" class="cta-button">Join Early Access</a>
+            <a href="#features" class="secondary-button">Learn More</a>
         </div>
     </section>
 
-    <section id="features" class="features">
-        <h2>Why DeskChat App?</h2>
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <h2 class="section-title">Why Choose DeskChat?</h2>
         <div class="features-grid">
             <div class="feature-card">
                 <div class="feature-icon">🔒</div>
-                <h3>End-to-End Encryption</h3>
-                <p>All messages encrypted. We can't read your conversations even if we wanted to.</p>
+                <h3>Private by Design</h3>
+                <p>End-to-end encryption ensures your conversations stay between you and your community. We never access your data.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">📍</div>
-                <h3>Local-First</h3>
-                <p>Connect with people in your actual community, not random strangers worldwide.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🚫</div>
-                <h3>No Tracking</h3>
-                <p>Zero behavioral profiling. No ads. No data selling. Ever.</p>
+                <div class="feature-icon">🌍</div>
+                <h3>Local Communities</h3>
+                <p>Discover and connect with people in your immediate area. Build meaningful relationships with those around you.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">⚡</div>
-                <h3>Real Communities</h3>
-                <p>From neighborhood watches to local events - build what matters around you.</p>
+                <h3>Real-time Connection</h3>
+                <p>Instant messaging that works both online and offline. Stay connected even without internet access.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <h3>No Algorithms</h3>
+                <p>We don't manipulate your feed or track your behavior. You control what you see and who you connect with.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔍</div>
+                <h3>Context-Aware</h3>
+                <p>Smart features that understand your location context while respecting your privacy boundaries.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3>Multiple Formats</h3>
+                <p>Choose between quick chats, community boards, or private groups based on your communication needs.</p>
             </div>
         </div>
     </section>
 
-    <section id="privacy" class="privacy">
-        <h2>Privacy by Design</h2>
-        <div class="privacy-content">
-            <div class="privacy-points">
-                <div class="point">
-                    <h4>🔐 Encrypted Everything</h4>
-                    <p>Messages, locations, metadata - all encrypted end-to-end.</p>
-                </div>
-                <div class="point">
-                    <h4>🗑️ Auto-Delete</h4>
-                    <p>Messages automatically deleted after 30 days. No permanent records.</p>
-                </div>
-                <div class="point">
-                    <h4>🌐 Approximate Locations Only</h4>
-                    <p>Neighborhood-level precision, not stalker-level tracking.</p>
-                </div>
-                <div class="point">
-                    <h4>📊 Zero Analytics</h4>
-                    <p>We don't track what you do or who you talk to.</p>
-                </div>
+    <!-- Privacy Section -->
+    <section class="privacy" id="privacy">
+        <h2>Privacy Isn't Optional.<br>It's Our Foundation.</h2>
+        <p>We believe you should own your data and control your digital footprint. That's why we built DeskChat differently from the ground up.</p>
+        <div class="privacy-features">
+            <div class="privacy-feature">
+                <h4>Zero Data Collection</h4>
+                <p>We don't collect, store, or sell your personal information. Your privacy is guaranteed.</p>
+            </div>
+            <div class="privacy-feature">
+                <h4>Local Processing</h4>
+                <p>Advanced features run on your device, not our servers. Your data never leaves your control.</p>
+            </div>
+            <div class="privacy-feature">
+                <h4>Transparent Design</h4>
+                <p>Open about how everything works. No hidden tracking or mysterious algorithms.</p>
             </div>
         </div>
     </section>
 
-    <section id="waitlist" class="waitlist">
-        <div class="waitlist-container">
-            <h2>Join the Private Social Revolution</h2>
-            <p>Be among the first to experience truly private local networking.</p>
-            <form id="waitlist-form" class="waitlist-form">
-                <input type="email" id="email" name="email" placeholder="Enter your email" required>
-                <input type="text" id="city" name="city" placeholder="Your city (optional)">
-                <button type="submit" class="btn-primary">Join Waitlist</button>
-            </form>
-            <p class="privacy-note">We'll only email you about launch updates. No spam, ever.</p>
-        </div>
+    <!-- CTA Section -->
+    <section class="cta-section" id="waitlist">
+        <h2>Be the First to Know</h2>
+        <p>Join our waitlist for early access and updates about DeskChat's development journey.</p>
+        <form class="email-form" id="waitlist-form">
+            <input type="email" class="email-input" placeholder="Enter your email" required>
+            <button type="submit" class="cta-button">Join Waitlist</button>
+        </form>
     </section>
 
+    <!-- Footer -->
     <footer>
         <div class="footer-content">
-            <div class="footer-section">
-                <h4>DeskChat App</h4>
-                <p>Building the future of private social networking.</p>
+            <div class="footer-column">
+                <h4>DeskChat</h4>
+                <p>Building the future of private social networking, one local connection at a time.</p>
             </div>
-            <div class="footer-section">
-                <h4>Legal</h4>
-                <ul>
-                    <li><a href="privacy.html">Privacy Policy</a></li>
-                    <li><a href="terms.html">Terms of Service</a></li>
+            <div class="footer-column">
+                <h4>Product</h4>
+                <ul class="footer-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#privacy">Privacy</a></li>
+                    <li><a href="#download">Download</a></li>
+                    <li><a href="#support">Support</a></li>
                 </ul>
             </div>
-            <div class="footer-section">
-                <h4>Connect</h4>
-                <ul>
-                    <li><a href="https://github.com/deskchatapp" target="_blank">GitHub</a></li>
-                    <li><a href="https://twitter.com/deskchatapp" target="_blank">Twitter</a></li>
-                    <li><a href="https://www.linkedin.com/company/deskchatapp" target="_blank">LinkedIn</a></li>
+            <div class="footer-column">
+                <h4>Company</h4>
+                <ul class="footer-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#careers">Careers</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Legal</h4>
+                <ul class="footer-links">
+                    <li><a href="#privacy-policy">Privacy Policy</a></li>
+                    <li><a href="#terms">Terms of Service</a></li>
+                    <li><a href="#cookies">Cookie Policy</a></li>
                 </ul>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 DeskChat App. All rights reserved.</p>
+        <div class="copyright">
+            <p>&copy; 2025 DeskChat App. All rights reserved. Building the digital town square you can trust.</p>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // Simple form handling
+        document.getElementById('waitlist-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('.email-input').value;
+            
+            // In a real app, you'd send this to your backend
+            alert(`Thanks! We'll notify you at ${email} when DeskChat is ready.`);
+            this.querySelector('.email-input').value = '';
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Simple scroll animation for feature cards
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe feature cards
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
 </body>
 </html>
