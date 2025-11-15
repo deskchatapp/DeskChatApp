@@ -429,10 +429,15 @@
         <h2>Be the First to Know</h2>
         <p>Join our waitlist for early access and updates about DeskChat's development journey.</p>
 
-<form class="email-form" action="https://formsubmit.co/deskchatapp@gmail.com"  id="waitlist-form" method="POST">
-            <input type="email" class="email-input" placeholder="Enter your email" required>
-            <button type="submit" class="cta-button">Join Waitlist</button>
-        </form>
+<form class="email-form" action="https://formsubmit.co/your-email@gmail.com" method="POST">
+    <input type="email" class="email-input" name="email" placeholder="Enter your email" required>
+    <input type="hidden" name="_subject" value="🎉 New DeskChat App Waitlist Signup!">
+    <input type="hidden" name="_template" value="table">
+    <input type="text" name="_honey" style="display:none"> <!-- Spam protection -->
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_next" value="https://deskchatapp.github.io/thank-you.html">
+    <button type="submit" class="cta-button">Join Waitlist</button>
+</form>
     </section>
 
     <!-- Footer -->
